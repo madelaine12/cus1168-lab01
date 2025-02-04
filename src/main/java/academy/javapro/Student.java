@@ -1,93 +1,30 @@
 package academy.javapro;
 
-import java.util.*;
-import java.util.stream.*;
+public class Student {
+    private String name;
+    private double gpa;
+    private String collegeYear; // Freshman, Sophomore, Junior, Senior
 
-class Student {
-    String name;
-    double gpa;
-    String year;
-
-    public Student(String name, double gpa, String year) {
+    public Student(String name, double gpa, String collegeYear) {
         this.name = name;
         this.gpa = gpa;
-        this.year = year;
+        this.collegeYear = collegeYear;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getGpa() {
+        return gpa;
+    }
+
+    public String getCollegeYear() {
+        return collegeYear;
     }
 
     @Override
     public String toString() {
-        return name + " (" + year + ") - GPA: " + gpa;
-    }
-}
-
-public class FunctionalProgramming {
-    public static void main(String[] args) {
-        // We create a list of numbers
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-
-        // Print the original list
-        System.out.println("Original numbers: " + numbers);
-
-        // TASK 1: Filter even numbers and print them
-        List<Integer> evenNumbers = numbers.stream()
-                .filter(n -> n % 2 == 0) // Keeps only even numbers
-                .collect(Collectors.toList()); // Collect results into a new list
-
-        System.out.println("Even numbers: " + evenNumbers);
-
-        // TASK 2: Double each number in the original list
-        List<Integer> doubledNumbers = numbers.stream()
-                .map(n -> n * 2) // Doubles each number
-                .collect(Collectors.toList()); // Collect results into a new list
-
-        // TASK 3: Sum all numbers in the doubled list
-        int sum = doubledNumbers.stream()
-                .mapToInt(n -> n) // Convert to IntStream
-                .sum(); // Sum all elements
-
-        // Print results
-        System.out.println("Doubled numbers: " + doubledNumbers);
-        System.out.println("Sum of doubled numbers: " + sum);
-
-        // Creating a list of students
-        List<Student> students = Arrays.asList(
-                new Student("Alice", 3.5, "Junior"),
-                new Student("Bob", 3.8, "Senior"),
-                new Student("Charlie", 2.9, "Sophomore"),
-                new Student("David", 3.1, "Freshman"),
-                new Student("Eve", 3.9, "Junior")
-        );
-
-        // Filtering: Students with GPA > 3.0
-        List<Student> highGpaStudents = students.stream()
-                .filter(s -> s.gpa > 3.0)
-                .collect(Collectors.toList());
-        
-        System.out.println("\nStudents with GPA > 3.0:");
-        highGpaStudents.forEach(System.out::println);
-
-        // Mapping: Extract names of students with GPA > 3.0
-        List<String> highGpaNames = highGpaStudents.stream()
-                .map(s -> s.name)
-                .collect(Collectors.toList());
-        
-        System.out.println("\nHigh GPA student names:");
-        highGpaNames.forEach(System.out::println);
-
-        // Reducing: Calculate the average GPA of all students
-        double averageGpa = students.stream()
-                .mapToDouble(s -> s.gpa)
-                .average()
-                .orElse(0.0);
-        
-        System.out.println("\nAverage GPA: " + String.format("%.2f", averageGpa));
-
-        // Collecting: Collect all "Junior" students into a list
-        List<Student> juniorStudents = students.stream()
-                .filter(s -> s.year.equals("Junior"))
-                .collect(Collectors.toList());
-        
-        System.out.println("\nJuniors:");
-        juniorStudents.forEach(System.out::println);
+        return name + " (" + collegeYear + ") - GPA: " + gpa;
     }
 }
